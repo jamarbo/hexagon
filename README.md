@@ -1,12 +1,14 @@
-# Pelota rebotando dentro de un hexágono (Python + Pygame)
+# Pelotas con gravedad rebotando dentro de un hexágono (Python + Pygame)
 
-Simulación simple de una pelota que rebota dentro de un hexágono regular, con rebote lento (coeficiente de restitución bajo) y manejo robusto de detección y resolución de colisiones contra lados y vértices.
+Simulación de múltiples pelotas de diferentes colores que rebotan dentro de un hexágono regular, con gravedad, colisiones entre pelotas y manejo robusto de colisiones contra lados y vértices.
 
 ## Características
 - Hexágono centrado y escalado a la ventana.
+- Varias pelotas de colores aleatorios con tamaños variados.
+- Gravedad (aceleración hacia abajo) y rebotes contra las paredes.
+- Colisiones elásticas entre pelotas con corrección posicional.
 - Colisiones exactas contra segmentos y vértices con normales hacia el interior.
-- Rebote lento: restitución < 1 y fricción tangencial para disipar energía.
-- Corrección posicional y "snap inside" para garantizar que la pelota no salga por errores numéricos.
+- Corrección posicional y "snap inside" para garantizar que ninguna pelota salga por errores numéricos.
 
 ## Requisitos
 - Python 3.9+
@@ -14,7 +16,7 @@ Simulación simple de una pelota que rebota dentro de un hexágono regular, con 
 
 ## Instalación
 
-```pwsh
+```powershell
 # Crear y activar entorno virtual (recomendado)
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -25,8 +27,12 @@ pip install -r requirements.txt
 
 ## Ejecución
 
-```pwsh
+```powershell
+# Desde la carpeta del proyecto (esta misma):
 python .\main.py
+
+# O desde la raíz del repositorio:
+python .\hexagon\main.py
 ```
 
 ## Controles
@@ -41,5 +47,10 @@ python .\main.py
 - Para timestep fijo, establece `fixed_dt = 1/120.0` en `run()`.
 
 ## Notas
-- La normal de cada arista está orientada hacia adentro asumiendo vértices generados CCW.
-- La pelota rebotará también en vértices, no solo en lados.
+- Ajusta parámetros en `World.__init__`:
+  - `self.gravity` para la gravedad (px/s^2).
+  - `self.restitucion_pared` y `self.friccion_tangencial` para rebotes con paredes.
+  - `self.restitucion_bolas` para rebotes entre pelotas.
+  - Cambia `self._spawn_balls(n=10)` para variar la cantidad de pelotas.
+- Las normales de las aristas apuntan hacia adentro asumiendo vértices CCW.
+- Las pelotas rebotan también en los vértices del hexágono, no solo en los lados.
