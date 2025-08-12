@@ -14,43 +14,44 @@ Simulación de múltiples pelotas de diferentes colores que rebotan dentro de un
 - Python 3.9+
 - Windows, macOS o Linux
 
-## Instalación
+## Preparación (si no tienes Python)
 
-```powershell
-# Crear y activar entorno virtual (recomendado)
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+1.  **Instalar Python**:
+    - Ve a [python.org](https://www.python.org/downloads/) y descarga la última versión de Python para tu sistema operativo.
+    - **Importante (en Windows)**: Durante la instalación, asegúrate de marcar la casilla que dice **"Add Python to PATH"**.
 
-# Instalar dependencias
-pip install -r requirements.txt
-```
+2.  **Verificar la instalación**:
+    - Abre una nueva terminal o `PowerShell` y escribe `python --version`. Si funciona, estás listo para el siguiente paso.
 
-## Ejecución
+## Instalación y Ejecución
 
-```powershell
-# Desde la carpeta del proyecto (esta misma):
-python .\main.py
+Una vez que tienes Python, sigue estos pasos en la terminal dentro de la carpeta del proyecto:
 
-# O desde la raíz del repositorio:
-python .\hexagon\main.py
-```
+1.  **Crear y activar un entorno virtual**:
+    ```pwsh
+    # Este comando crea una carpeta .venv con un entorno de Python aislado
+    python -m venv .venv
+
+    # Activa el entorno. Debes hacer esto cada vez que abras una nueva terminal.
+    .\.venv\Scripts\Activate.ps1
+    ```
+
+2.  **Instalar las dependencias**:
+    ```pwsh
+    # Instala pygame usando el archivo de requisitos
+    pip install -r requirements.txt
+    ```
+
+3.  **Ejecutar el programa**:
+    ```pwsh
+    python .\main.py
+    ```
 
 ## Controles
-- ESC: salir
-
-## Ajustes útiles
-- Cambia el tamaño de la ventana en `run()` (variables `W`, `H`).
-- Ajusta la "lentitud" del rebote en `World.__init__` modificando:
-  - `self.restitucion` (0.3–0.6 típicamente)
-  - `self.friccion_tangencial` (0.0–0.05)
-  - `self.damping_global` (0.0–0.01)
-- Para timestep fijo, establece `fixed_dt = 1/120.0` en `run()`.
+- **ESPACIO**: Agitar el contenedor.
+- **ESC**: Salir.
 
 ## Notas
-- Ajusta parámetros en `World.__init__`:
-  - `self.gravity` para la gravedad (px/s^2).
-  - `self.restitucion_pared` y `self.friccion_tangencial` para rebotes con paredes.
-  - `self.restitucion_bolas` para rebotes entre pelotas.
-  - Cambia `self._spawn_balls(n=10)` para variar la cantidad de pelotas.
-- Las normales de las aristas apuntan hacia adentro asumiendo vértices CCW.
-- Las pelotas rebotan también en los vértices del hexágono, no solo en los lados.
+- La simulación ahora incluye múltiples pelotas, gravedad y la capacidad de "agitar" el contenedor.
+- El código de colisiones ha sido actualizado para manejar interacciones entre múltiples pelotas.
+- Si tienes problemas, asegúrate de que el entorno virtual esté activado (deberías ver `(.venv)` al principio de la línea de tu terminal).
