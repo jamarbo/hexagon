@@ -105,7 +105,7 @@ class World:
         self.edges = build_edges(self.verts)
 
         # Física global
-        self.gravity = (0.0, 900.0)
+        self.gravity = (0.0, 150.0) # Gravedad lunar (1/6 aprox)
         self.restitucion_pared = 0.5
         self.restitucion_bolas = 0.9
         self.friccion_tangencial = 0.02
